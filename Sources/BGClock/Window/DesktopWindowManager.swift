@@ -21,8 +21,9 @@ struct DesktopWindowConfig: Sendable {
 @MainActor
 final class DesktopWindowManager {
     private var window: NSWindow?
+    private let configLoader = ConfigLoader()
 
-    func createWindow(with rootView: some View) {
+    func createWindow() {
         guard let screen = NSScreen.main else {
             return
         }
@@ -40,10 +41,29 @@ final class DesktopWindowManager {
         window.collectionBehavior = DesktopWindowConfig.collectionBehavior
         window.hasShadow = DesktopWindowConfig.hasShadow
 
+        let rootView = DesktopClockRootView(configLoader: configLoader)
         let hostingView = NSHostingView(rootView: rootView)
         window.contentView = hostingView
         window.orderFront(nil)
 
         self.window = window
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(screenDidChange),
+            name: NSApplication.didChangeScreenParametersNotification,
+            object: nil
+        )
+    }
+
+    @objc private func screenDidChange(_ notification: Notification) {
+        updateWindowFrame()
+    }
+
+    func updateWindowFrame() {
+        guard let screen = NSScreen.main, let window else {
+            return
+        }
+        window.setFrame(screen.frame, display: true)
     }
 }

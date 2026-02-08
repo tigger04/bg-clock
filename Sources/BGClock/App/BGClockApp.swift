@@ -14,11 +14,12 @@ struct BGClockApp: App {
     }
 }
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let windowManager = DesktopWindowManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApplication.shared.setActivationPolicy(.accessory)
-        windowManager.createWindow(with: Color.clear)
+        windowManager.createWindow()
     }
 }
