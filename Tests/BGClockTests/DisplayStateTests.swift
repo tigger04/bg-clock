@@ -79,11 +79,11 @@ struct DisplayStateTests {
         #expect(state.clockSize == 1440.0)
     }
 
-    @Test("Default position places clock in upper-left area")
-    func defaultPosition_upperLeftArea() {
+    @Test("Default position centres the clock")
+    func defaultPosition_centred() {
         let position = Position()
-        #expect(position.xPercent == 35.0)
-        #expect(position.yPercent == 20.0)
+        #expect(position.xPercent == 50.0)
+        #expect(position.yPercent == 50.0)
     }
 
     @Test("Display state recalculates with new screen dimensions")

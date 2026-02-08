@@ -1,25 +1,29 @@
 // ABOUTME: Main entry point for the bg-clock application.
-// Configures the app as a background-only accessory (no Dock icon).
+// Uses AppKit lifecycle directly for reliable desktop window creation.
 
-import SwiftUI
-
-@main
-struct BGClockApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
-    var body: some Scene {
-        Settings {
-            EmptyView()
-        }
-    }
-}
+import AppKit
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let windowManager = DesktopWindowManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        NSLog("bg-clock: applicationDidFinishLaunching")
+        NSLog("bg-clock: screens=%d main=%@", NSScreen.screens.count, NSScreen.main?.frame.debugDescription ?? "nil")
         NSApplication.shared.setActivationPolicy(.accessory)
         windowManager.createWindow()
+        NSLog("bg-clock: window created")
+    }
+}
+
+@main
+enum Main {
+    static func main() {
+        NSLog("bg-clock: main() starting")
+        let app = NSApplication.shared
+        let delegate = AppDelegate()
+        app.delegate = delegate
+        NSLog("bg-clock: calling app.run()")
+        app.run()
     }
 }

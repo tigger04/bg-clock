@@ -20,8 +20,9 @@ build:
 test:
 	swift test
 
-run: build
-	"$(EXECUTABLE)" &
+run: bundle
+	@pkill BGClock 2>/dev/null; true
+	@open "$(BUNDLE_NAME)"
 
 clean:
 	swift package clean

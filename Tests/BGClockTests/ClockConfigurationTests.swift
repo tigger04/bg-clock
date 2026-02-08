@@ -78,7 +78,7 @@ struct ClockConfigurationTests {
     @Test("Default configuration has expected size")
     func configuration_defaults_sizePercent30() {
         let config = ClockConfiguration()
-        #expect(config.sizePercent == 30.0)
+        #expect(config.sizePercent == 50.0)
     }
 
     @Test("Default configuration has date center enabled")
@@ -87,10 +87,10 @@ struct ClockConfigurationTests {
         #expect(config.dateCenter.enabled == true)
     }
 
-    @Test("Default configuration has day on minute enabled")
-    func configuration_defaults_dayOnMinuteEnabled() {
+    @Test("Default configuration has day on minute disabled")
+    func configuration_defaults_dayOnMinuteDisabled() {
         let config = ClockConfiguration()
-        #expect(config.dayOnMinute.enabled == true)
+        #expect(config.dayOnMinute.enabled == false)
         #expect(config.dayOnMinute.allCaps == true)
     }
 }

@@ -37,14 +37,14 @@ struct ClockConfiguration: Codable, Sendable {
 
     init(
         position: Position = .init(),
-        sizePercent: Double = 30.0,
+        sizePercent: Double = 50.0,
         secondHand: HandConfig = .defaultSecond,
         minuteHand: HandConfig = .defaultMinute,
         hourHand: HandConfig = .defaultHour,
         majorMarker: MarkerConfig = .defaultMajor,
         minorMarker: MarkerConfig = .defaultMinor,
         disc: DiscConfig = .init(),
-        backgroundBlur: Double = 0.0,
+        backgroundBlur: Double = 10.0,
         dateCenter: DateCenterConfig = .init(),
         dayOnMinute: HandLabelConfig = .defaultDay,
         monthOnHour: HandLabelConfig = .defaultMonth
@@ -87,7 +87,7 @@ struct Position: Codable, Sendable {
     var xPercent: Double
     var yPercent: Double
 
-    init(xPercent: Double = 35.0, yPercent: Double = 20.0) {
+    init(xPercent: Double = 50.0, yPercent: Double = 50.0) {
         self.xPercent = xPercent
         self.yPercent = yPercent
     }
@@ -99,21 +99,21 @@ struct HandConfig: Codable, Sendable {
     var lengthPercent: Double
 
     static let defaultSecond = HandConfig(
-        color: ColorValue(r: 0.82, g: 0.38, b: 0.56, a: 0.35),
-        width: 2.0,
+        color: ColorValue(r: 1.0, g: 0.27, b: 0.27, a: 0.80),
+        width: 1.5,
         lengthPercent: 100.0
     )
 
     static let defaultMinute = HandConfig(
-        color: ColorValue(r: 0.35, g: 0.45, b: 0.60, a: 0.10),
-        width: 16.0,
-        lengthPercent: 58.0
+        color: ColorValue(r: 0.80, g: 0.80, b: 0.80, a: 0.80),
+        width: 4.0,
+        lengthPercent: 80.0
     )
 
     static let defaultHour = HandConfig(
-        color: ColorValue(r: 0.40, g: 0.40, b: 0.50, a: 0.10),
-        width: 23.0,
-        lengthPercent: 35.0
+        color: ColorValue(r: 0.80, g: 0.80, b: 0.80, a: 0.80),
+        width: 6.0,
+        lengthPercent: 58.0
     )
 }
 
@@ -143,11 +143,11 @@ struct DiscConfig: Codable, Sendable {
     var blur: Double
 
     init(
-        sizePercent: Double = 96.0,
-        color: ColorValue = ColorValue(r: 0.0, g: 0.0, b: 0.0, a: 0.15),
-        borderWidth: Double = 0.0,
-        borderColor: ColorValue = ColorValue(r: 0.0, g: 0.0, b: 0.0, a: 0.0),
-        blur: Double = 5.0
+        sizePercent: Double = 95.0,
+        color: ColorValue = ColorValue(r: 0.1, g: 0.1, b: 0.12, a: 0.45),
+        borderWidth: Double = 1.0,
+        borderColor: ColorValue = ColorValue(r: 1.0, g: 1.0, b: 1.0, a: 0.15),
+        blur: Double = 10.0
     ) {
         self.sizePercent = sizePercent
         self.color = color
@@ -209,7 +209,7 @@ struct HandLabelConfig: Codable, Sendable {
     var letterSpacing: Double
 
     static let defaultDay = HandLabelConfig(
-        enabled: true,
+        enabled: false,
         fontSize: 16.0,
         color: ColorValue(r: 0.0, g: 0.0, b: 0.0, a: 0.80),
         backgroundColor: ColorValue(r: 0.0, g: 0.0, b: 0.0, a: 0.0),
@@ -224,7 +224,7 @@ struct HandLabelConfig: Codable, Sendable {
     )
 
     static let defaultMonth = HandLabelConfig(
-        enabled: true,
+        enabled: false,
         fontSize: 20.0,
         color: ColorValue(r: 0.0, g: 0.0, b: 0.20, a: 0.60),
         backgroundColor: ColorValue(r: 0.0, g: 0.0, b: 0.0, a: 0.0),
