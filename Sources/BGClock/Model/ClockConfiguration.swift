@@ -2,6 +2,24 @@
 // Supports partial JSON decoding — missing fields fall back to defaults.
 
 import Foundation
+import SwiftUI
+
+extension Font.Weight {
+    /// Maps CSS numeric font-weight values (100–900) to SwiftUI weights.
+    static func fromNumeric(_ value: Double) -> Font.Weight {
+        switch value {
+        case ..<150: return .ultraLight
+        case ..<250: return .thin
+        case ..<350: return .light
+        case ..<450: return .regular
+        case ..<550: return .medium
+        case ..<650: return .semibold
+        case ..<750: return .bold
+        case ..<850: return .heavy
+        default: return .black
+        }
+    }
+}
 
 struct ClockConfiguration: Codable, Sendable {
     var position: Position
