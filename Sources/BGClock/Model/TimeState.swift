@@ -27,7 +27,8 @@ struct TimeState: Sendable {
 
         let totalSeconds = second + nano
         let totalMinutes = minute + totalSeconds / 60.0
-        let totalHours = hour + totalMinutes / 60.0
+        let hour12 = hour.truncatingRemainder(dividingBy: 12)
+        let totalHours = (hour12 == 0 && hour != 0 ? 12 : hour12) + totalMinutes / 60.0
 
         self.secondAngle = Angle.degrees(totalSeconds / 60.0 * 360.0)
         self.minuteAngle = Angle.degrees(totalMinutes / 60.0 * 360.0)

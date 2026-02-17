@@ -22,7 +22,7 @@ struct ClockHandView<Overlay: View>: View {
             }
             .shadow(color: .black.opacity(0.25), radius: config.width * 0.5)
             .offset(x: handLength / 2 - config.width / 2)
-            .rotationEffect(angle)
+            .rotationEffect(angle - Angle.degrees(90))
     }
 
     init(
