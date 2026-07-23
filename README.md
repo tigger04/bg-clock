@@ -144,4 +144,4 @@ rm -rf ~/.config/bg-clock
 
 ## Licence
 
-MIT. Copyright Tadg Paul.
+MIT. Copyright Tadhg O'Brien.
